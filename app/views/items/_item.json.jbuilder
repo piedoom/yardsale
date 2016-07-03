@@ -1,0 +1,10 @@
+json.id             item.id
+json.title          item.title
+json.description    item.description
+json.price_cents    item.price_cents
+json.available      item.available
+json.photo          asset_url(item.photo.url(:thumb))
+json.photo_original asset_url(item.photo.url(:original))
+json.negotiable     item.negotiable
+json.created_at     item.created_at
+json.updated_at     item.updated_at

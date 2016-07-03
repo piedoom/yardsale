@@ -1,0 +1,25 @@
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+<style>
+    * {
+font-family: 'Roboto', sans-serif;
+    }
+</style>
+
+
+<table cellspacing="0">
+
+<% @items.each_slice(5) do |item_group| %>
+    <tr>
+        <% item_group.each do |item| %>
+            <td style="border: 1px black dashed">
+                <h1 style="text-align: center; vertical-align: top; margin: 12; margin-bottom: 0;"> $<%= sprintf "%.2f", item.price_cents / 100.0 %> </h1>
+                <% qrcode = RQRCode::QRCode.new(item_url(item)) %>
+                <img src="<%= qrcode.as_png(size:150,border_modules: 2, color: 'black').to_data_url %>" />
+                <p style="margin: 12; margin-top: 0; text-align: center;">Scan this code <br> for more info <br><br> <span style="color: grey; max-width: 150px; "> <%= item.title %> </span></p>
+            </td>
+        <% end %>
+    </tr>
+<% end %>
+
+</table>
