@@ -19,5 +19,8 @@
 
 # Ignore Byebug command history file.
 .byebug_history
-/config/database.yml
-/public/system/*
+
+config/database.yml
+public/system/*
+
+database.yml
