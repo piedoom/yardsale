@@ -10,12 +10,45 @@ font-family: 'Roboto', sans-serif;
     margin: 12px;
     margin-top: 0;
     }
+
+    body{
+        width: 8.5in;
+    }
+
+    tr{
+        width: 8.5in;
+    }
+
+    tbody{
+        width: 8.5in;
+    }
+
+    td{
+        width: 1.4166in;
+    }
+
+    @page {
+        size: 8.5in 11in;
+    }
+
+    table{
+        page-break-after: always;
+    }
+
+    h1{
+        font-size: 32px;
+    }
 </style>
 
+<% @items.each do |items| %>
+
+<% # different slice amount if we have qr codes or not %>
+<% slice_amount = items.first.use_qr ? 30 : 72 %>
+
+<% items.each_slice(slice_amount) do |page| %>
 
 <table cellspacing="0">
-
-<% @items.each_slice(5) do |item_group| %>
+<% page.each_slice(6) do |item_group| %>
     <tr>
         <% item_group.each do |item| %>
             <td style="border: 1px black dashed">
@@ -26,13 +59,16 @@ font-family: 'Roboto', sans-serif;
                     <div style="text-align: center;" >
                         <img src="<%= qrcode.as_png(size:100,border_modules: 2, color: 'black').to_data_url %>" />
                     </div>
-                    <p style="font-size: 8;">Scan this code <br> for more info</p>
+                    <p style="font-size: 8; margin-bottom: 6px;">Scan this code <br> for more info</p>
                 <% end %>
 
-                <p> <%= item.title %> </p>
+                <p style="margin-top: 0;"> <%= item.title %> </p>
 
         <% end %>
     </tr>
 <% end %>
 
 </table>
+
+<% end %>
+<% end %>
