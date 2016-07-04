@@ -1,0 +1,91 @@
+<script>
+    function init(){
+        var content = document.querySelector('#content');
+        content.style.minHeight = window.innerHeight;
+        refresh();
+    }
+
+    function refresh(){
+        var header = document.querySelector('#imgHeader');
+        header.style.top = (document.querySelector('#headerImg').height / 2) - document.querySelector('#headerImg').height / 10;
+
+        var image = document.querySelector('#headerImg');
+
+        var headerContainer = document.querySelector('#headerContainer');
+        headerContainer.style.width = image.width;
+        headerContainer.style.height = image.height;
+        
+    }
+
+    window.onload = init;
+    window.onresize = refresh;
+
+
+</script>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+<style>
+    *{
+        font-family: 'Roboto', sans-serif;
+    }
+
+    body{
+        padding: 0;
+        margin: 0;
+        background: #f2f2f2;
+    }
+
+    img{
+        width: 100%;
+    }
+
+    #content{
+        max-width: 800px;
+        width: 100%;
+        margin: 0 auto;
+        background: white;
+    }
+
+    h1{
+        margin: 0;
+        text-align: center;
+        color: white;
+    }
+
+
+    article{
+        padding: 24px;
+    }
+
+    #imgHeader{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    #headerContainer{
+        position: absolute;
+        top: 0;
+	background: -moz-linear-gradient(top,  rgba(33,39,48,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(33,39,48,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(33,39,48,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6212730', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+    }
+</style>
+
+<div id="content">
+    <%= image_tag(@item.photo.url(:original), id: 'headerImg') %>
+    <header id="headerContainer">
+        <h1 id="imgHeader">
+            <%= @item.title %> - $<%= sprintf('%.2f', @item.price_cents / 100.0) %>
+        </h1>
+    </header>
+    
+    <article>
+        <p>
+            <%= @item.description %>
+        </p>
+    </article>
+</div>
