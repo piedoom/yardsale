@@ -5,8 +5,8 @@ class ItemsController < ApplicationController
 
   # GET /items
   def index
-    cached_items = Item.all
-    @items = [cached_items.select { |item| item.use_qr == true }, cached_items.select { |item| item.use_qr == false }]
+    @items = Item.all
+    @items_list = [@items.select { |item| item.use_qr == true }, @items.select { |item| item.use_qr == false }]
     render 'items/index'
   end
 

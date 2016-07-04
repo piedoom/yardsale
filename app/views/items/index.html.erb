@@ -40,7 +40,7 @@ font-family: 'Roboto', sans-serif;
     }
 </style>
 
-<% @items.each do |items| %>
+<% @items_list.each do |items| %>
 
 <% # different slice amount if we have qr codes or not %>
 <% slice_amount = items.first.use_qr ? 30 : 72 %>
